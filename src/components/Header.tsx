@@ -1,4 +1,11 @@
-import { addDays, format, subDays } from "date-fns";
+import {
+  addDays,
+  addMonths,
+  format,
+  startOfWeek,
+  subDays,
+  subMonths,
+} from "date-fns";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useCalendar } from "../context/CalendarContext";
@@ -13,14 +20,18 @@ export const Header = () => {
 
   // --- Navigation Handlers ---
   const goToNext = () => {
-    const newDate =
-      view === "week" ? addDays(currentDate, 7) : addDays(currentDate, 1);
+    let newDate;
+    if (view === "day") newDate = addDays(currentDate, 1);
+    else if (view === "week") newDate = addDays(currentDate, 7);
+    else newDate = addMonths(currentDate, 1);
     setCurrentDate(newDate);
   };
 
   const goToPrevious = () => {
-    const newDate =
-      view === "week" ? subDays(currentDate, 7) : subDays(currentDate, 1);
+    let newDate;
+    if (view === "day") newDate = subDays(currentDate, 1);
+    else if (view === "week") newDate = subDays(currentDate, 7);
+    else newDate = subMonths(currentDate, 1);
     setCurrentDate(newDate);
   };
 
@@ -34,7 +45,9 @@ export const Header = () => {
       case "day":
         return format(currentDate, "MMMM d, yyyy");
       case "week":
-        return format(currentDate, "MMMM yyyy");
+        const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
+        const weekEnd = addDays(weekStart, 6);
+        return `${format(weekStart, "MMM d")} - ${format(weekEnd, "d, yyyy")}`;
       case "month":
         return format(currentDate, "MMMM yyyy");
       default:

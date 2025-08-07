@@ -13,6 +13,7 @@ export interface Event {
   title: string;
   start: Date;
   end: Date;
+  color?: string; // Optional color for the event
   // Optional properties can be added later, e.g., color, description
 }
 
@@ -29,6 +30,7 @@ export interface AvailabilitySlot {
  * the calendar's appearance.
  */
 export interface Theme {
+  // Header
   headerContainer?: StyleProp<ViewStyle>;
   headerText?: StyleProp<TextStyle>;
   viewSwitcherContainer?: StyleProp<ViewStyle>;
@@ -39,5 +41,19 @@ export interface Theme {
   navButton?: StyleProp<ViewStyle>;
   navButtonText?: StyleProp<TextStyle>;
   todayButtonText?: StyleProp<TextStyle>;
-  // We will add more theme properties for other components later
+
+  // Week View
+  weekViewContainer?: StyleProp<ViewStyle>;
+  dayLabelContainer?: StyleProp<ViewStyle>;
+  dayLabelText?: StyleProp<TextStyle>;
+  dayLabelNumberText?: StyleProp<TextStyle>;
+
+  // Time Grid
+  timeGridContainer?: StyleProp<ViewStyle>;
+  timeLabel?: StyleProp<TextStyle>;
+  gridCell?: StyleProp<ViewStyle>;
+
+  // Event Card
+  eventCard?: StyleProp<ViewStyle>;
+  eventCardTitle?: StyleProp<TextStyle>;
 }
