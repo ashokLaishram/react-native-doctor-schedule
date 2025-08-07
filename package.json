@@ -1,0 +1,78 @@
+{
+  "name": "react-native-doctor-schedule",
+  "version": "0.1.0",
+  "description": "A powerful, flexible, and doctor-centric scheduling library for React Native.",
+  "main": "./lib/module/index.js",
+  "types": "./lib/typescript/index.d.ts",
+  "scripts": {
+    "build": "expo-module build",
+    "clean": "expo-module clean",
+    "lint": "expo-module lint",
+    "test": "expo-module test",
+    "prepare": "bob build",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "expo-module": "expo-module",
+    "open:ios": "xed example/ios",
+    "open:android": "open -a \"Android Studio\" example/android"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "react-native-doctor-schedule",
+    "ReactNativeDoctorSchedule"
+  ],
+  "repository": "https://github.com/ashokLaishram/react-native-doctor-schedule",
+  "bugs": {
+    "url": "https://github.com/ashokLaishram/react-native-doctor-schedule/issues"
+  },
+  "author": "ashok khuman <ashok.laishram@gmail.com> (https://github.com/ashokLaishram)",
+  "license": "MIT",
+  "homepage": "https://github.com/ashokLaishram/react-native-doctor-schedule#readme",
+  "dependencies": {
+    "date-fns": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "~19.0.0",
+    "expo": "~53.0.0",
+    "expo-module-scripts": "^4.1.9",
+    "react-native": "0.79.1",
+    "react-native-builder-bob": "^0.40.13"
+  },
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
+  },
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./lib/typescript/index.d.ts",
+      "default": "./lib/module/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "lib",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__"
+  ],
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
+      "typescript"
+    ]
+  },
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/"
+  ]
+}
