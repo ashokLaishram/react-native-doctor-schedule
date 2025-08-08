@@ -22,7 +22,6 @@ interface CalendarContextType {
   setWeekViewWidth: (width: number) => void; // Add setter for width
 }
 
-// Create the context with a default undefined value.
 const CalendarContext = createContext<CalendarContextType | undefined>(
   undefined
 );
