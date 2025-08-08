@@ -1,5 +1,5 @@
 import { addDays, format, isWithinInterval, startOfWeek } from "date-fns";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   LayoutChangeEvent,
   ScrollView,
@@ -19,11 +19,16 @@ export const WeekView = () => {
   const weekDays = Array.from({ length: 7 }).map((_, i) =>
     addDays(weekStart, i)
   );
+  const scrollViewRef = useRef<ScrollView>(null);
 
   const onLayout = (event: LayoutChangeEvent) => {
     const { width } = event.nativeEvent.layout;
     setWeekViewWidth(width);
   };
+
+  useEffect(() => {
+    scrollViewRef.current?.scrollTo({ y: HOUR_HEIGHT * 8, animated: false });
+  }, []);
 
   return (
     <View style={[styles.container, theme.weekViewContainer]}>
@@ -41,13 +46,22 @@ export const WeekView = () => {
         ))}
       </View>
 
-      <ScrollView>
+      <ScrollView ref={scrollViewRef}>
         <View style={styles.gridContainer}>
           <TimeGrid hourHeight={HOUR_HEIGHT} />
           <View style={styles.eventGrid} onLayout={onLayout}>
-            {weekDays.map((day, dayIndex) => (
+            {/* FIX: Render horizontal lines behind the day columns */}
+            <View style={StyleSheet.absoluteFill}>
+              {Array.from({ length: 24 }).map((_, i) => (
+                <View
+                  key={i}
+                  style={[styles.horizontalLine, { top: i * HOUR_HEIGHT }]}
+                />
+              ))}
+            </View>
+
+            {weekDays.map((day) => (
               <View key={day.toISOString()} style={styles.dayColumn}>
-                {/* Render vertical grid lines for each day column */}
                 <View style={styles.dayColumnLine} />
               </View>
             ))}
@@ -96,5 +110,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#e0e0e0",
     position: "absolute",
     right: 0,
+  },
+  horizontalLine: {
+    height: 1,
+    width: "100%",
+    backgroundColor: "#e0e0e0",
+    position: "absolute",
   },
 });

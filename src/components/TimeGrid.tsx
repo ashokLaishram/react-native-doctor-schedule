@@ -15,8 +15,8 @@ export const TimeGrid = ({ hourHeight }: TimeGridProps) => {
       {hours.map((hour) => (
         <View key={hour} style={[styles.hourRow, { height: hourHeight }]}>
           <Text style={[styles.timeLabel, theme.timeLabel]}>
-            {/* FIX: Only show label for hours > 0 */}
-            {hour > 0 ? `${hour}:00` : ""}
+            {/* FIX: Display all hour labels, including 0:00 */}
+            {`${hour}:00`}
           </Text>
         </View>
       ))}
@@ -34,15 +34,13 @@ const styles = StyleSheet.create({
   hourRow: {
     justifyContent: "flex-start",
     alignItems: "flex-end",
-    borderBottomWidth: 1,
-    borderBottomColor: "#e0e0e0",
+    // FIX: Removed the border from here, as it's now drawn in WeekView
   },
   timeLabel: {
     fontSize: 10,
     color: "#6c757d",
-    // FIX: Use absolute positioning for precise alignment
     position: "absolute",
-    top: -6,
+    top: -6, // Position label just above the line
     right: 5,
   },
 });
