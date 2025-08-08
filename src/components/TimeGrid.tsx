@@ -15,6 +15,7 @@ export const TimeGrid = ({ hourHeight }: TimeGridProps) => {
       {hours.map((hour) => (
         <View key={hour} style={[styles.hourRow, { height: hourHeight }]}>
           <Text style={[styles.timeLabel, theme.timeLabel]}>
+            {/* FIX: Only show label for hours > 0 */}
             {hour > 0 ? `${hour}:00` : ""}
           </Text>
         </View>
@@ -39,6 +40,9 @@ const styles = StyleSheet.create({
   timeLabel: {
     fontSize: 10,
     color: "#6c757d",
-    transform: [{ translateY: -6 }],
+    // FIX: Use absolute positioning for precise alignment
+    position: "absolute",
+    top: -6,
+    right: 5,
   },
 });

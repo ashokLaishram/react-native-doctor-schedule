@@ -16,8 +16,10 @@ interface CalendarContextType {
   theme: Theme;
   events: Event[];
   availability: AvailabilitySlot[];
+  weekViewWidth: number; // Add width to the context
   setCurrentDate: (date: Date) => void;
   setView: (view: ViewMode) => void;
+  setWeekViewWidth: (width: number) => void; // Add setter for width
 }
 
 // Create the context with a default undefined value.
@@ -44,6 +46,7 @@ export const CalendarProvider = ({
 }: CalendarProviderProps) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [view, setView] = useState<ViewMode>("week");
+  const [weekViewWidth, setWeekViewWidth] = useState(0); // State for the width
 
   const value = {
     currentDate,
@@ -51,8 +54,10 @@ export const CalendarProvider = ({
     theme,
     events,
     availability,
+    weekViewWidth,
     setCurrentDate,
     setView,
+    setWeekViewWidth,
   };
 
   return (
@@ -61,6 +66,7 @@ export const CalendarProvider = ({
     </CalendarContext.Provider>
   );
 };
+
 /**
  * A custom hook that provides an easy way for child components to access
  * the calendar's state and functions.

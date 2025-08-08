@@ -1,6 +1,6 @@
 import { differenceInMinutes, getDay } from "date-fns";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ViewStyle } from "react-native";
 import { useCalendar } from "../context/CalendarContext";
 import { Event } from "../ReactNativeDoctorSchedule.types";
 
@@ -10,7 +10,12 @@ interface EventCardProps {
 }
 
 export const EventCard = ({ event, hourHeight }: EventCardProps) => {
-  const { theme } = useCalendar();
+  const { theme, weekViewWidth } = useCalendar();
+
+  // Return null if the container width hasn't been measured yet
+  if (weekViewWidth === 0) {
+    return null;
+  }
 
   const durationInMinutes = differenceInMinutes(event.end, event.start);
   const height = (durationInMinutes / 60) * hourHeight;
@@ -20,22 +25,22 @@ export const EventCard = ({ event, hourHeight }: EventCardProps) => {
 
   // Day index (Monday = 0)
   const dayIndex = getDay(event.start) === 0 ? 6 : getDay(event.start) - 1;
-  const left = `${(100 / 7) * dayIndex}%`;
+  const dayColumnWidth = weekViewWidth / 7;
+  // FIX: Account for horizontal margin when calculating width and position
+  const margin = 1;
+  const left = dayColumnWidth * dayIndex + margin;
+  const width = dayColumnWidth - margin * 2;
+
+  const dynamicStyles: ViewStyle = {
+    top,
+    height,
+    left,
+    width,
+    backgroundColor: event.color || "#007bff",
+  };
 
   return (
-    <View
-      style={[
-        styles.card,
-        {
-          top,
-          height,
-          left,
-          width: `${100 / 7}%`,
-          backgroundColor: event.color || "#007bff",
-        },
-        theme.eventCard,
-      ]}
-    >
+    <View style={[styles.card, dynamicStyles, theme.eventCard]}>
       <Text style={[styles.title, theme.eventCardTitle]} numberOfLines={1}>
         {event.title}
       </Text>
@@ -48,7 +53,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     borderRadius: 4,
     padding: 4,
-    marginHorizontal: 1, // To create a small gap between events
     overflow: "hidden",
   },
   title: {

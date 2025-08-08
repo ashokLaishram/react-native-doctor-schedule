@@ -1,5 +1,5 @@
-// src/ReactNativeDoctorSchedule.types.ts
 import type { StyleProp, TextStyle, ViewStyle } from "react-native";
+
 /**
  * Defines the possible view modes for the calendar.
  */
@@ -14,7 +14,6 @@ export interface Event {
   start: Date;
   end: Date;
   color?: string; // Optional color for the event
-  // Optional properties can be added later, e.g., color, description
 }
 
 /**

@@ -47,7 +47,11 @@ export const Header = () => {
       case "week":
         const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
         const weekEnd = addDays(weekStart, 6);
-        return `${format(weekStart, "MMM d")} - ${format(weekEnd, "d, yyyy")}`;
+        // FIX: Corrected date formatting for clarity
+        return `${format(weekStart, "MMM d")} - ${format(
+          weekEnd,
+          "MMM d, yyyy"
+        )}`;
       case "month":
         return format(currentDate, "MMMM yyyy");
       default:
