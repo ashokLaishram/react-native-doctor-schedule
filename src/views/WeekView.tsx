@@ -50,7 +50,6 @@ export const WeekView = () => {
         <View style={styles.gridContainer}>
           <TimeGrid hourHeight={HOUR_HEIGHT} />
           <View style={styles.eventGrid} onLayout={onLayout}>
-            {/* FIX: Render horizontal lines behind the day columns */}
             <View style={StyleSheet.absoluteFill}>
               {Array.from({ length: 24 }).map((_, i) => (
                 <View
@@ -98,7 +97,11 @@ const styles = StyleSheet.create({
   dayLabel: { flex: 1, alignItems: "center", paddingVertical: 8 },
   dayName: { fontSize: 12, color: "#6c757d" },
   dayNumber: { fontSize: 16, fontWeight: "600", color: "#212529" },
-  gridContainer: { flexDirection: "row" },
+  gridContainer: {
+    flexDirection: "row",
+    // FIX: Add top padding to make space for the 0:00 label
+    //paddingTop: 10,
+  },
   eventGrid: { flex: 1, flexDirection: "row" },
   dayColumn: {
     flex: 1,
