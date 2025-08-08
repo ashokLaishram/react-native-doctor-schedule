@@ -27,7 +27,6 @@ export const WeekView = () => {
 
   return (
     <View style={[styles.container, theme.weekViewContainer]}>
-      {/* Day Labels */}
       <View style={[styles.dayLabelsContainer, theme.dayLabelContainer]}>
         <View style={styles.timeGutter} />
         {weekDays.map((day) => (
