@@ -39,7 +39,6 @@ export const Header = () => {
     setCurrentDate(new Date());
   };
 
-  // --- Header Text Logic ---
   const getHeaderText = () => {
     switch (view) {
       case "day":
