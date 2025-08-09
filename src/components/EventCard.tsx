@@ -1,6 +1,6 @@
 import { differenceInMinutes, getDay } from "date-fns";
 import React from "react";
-import { StyleSheet, Text, View, ViewStyle } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, ViewStyle } from "react-native";
 import { useCalendar } from "../context/CalendarContext";
 import { Event } from "../ReactNativeDoctorSchedule.types";
 
@@ -10,7 +10,7 @@ interface EventCardProps {
 }
 
 export const EventCard = ({ event, hourHeight }: EventCardProps) => {
-  const { theme, weekViewWidth } = useCalendar();
+  const { theme, weekViewWidth, onEventPress } = useCalendar();
 
   // Return null if the container width hasn't been measured yet
   if (weekViewWidth === 0) {
@@ -26,7 +26,6 @@ export const EventCard = ({ event, hourHeight }: EventCardProps) => {
   // Day index (Monday = 0)
   const dayIndex = getDay(event.start) === 0 ? 6 : getDay(event.start) - 1;
   const dayColumnWidth = weekViewWidth / 7;
-  // FIX: Account for horizontal margin when calculating width and position
   const margin = 1;
   const left = dayColumnWidth * dayIndex + margin;
   const width = dayColumnWidth - margin * 2;
@@ -40,11 +39,14 @@ export const EventCard = ({ event, hourHeight }: EventCardProps) => {
   };
 
   return (
-    <View style={[styles.card, dynamicStyles, theme.eventCard]}>
+    <TouchableOpacity
+      onPress={() => onEventPress?.(event)}
+      style={[styles.card, dynamicStyles, theme.eventCard]}
+    >
       <Text style={[styles.title, theme.eventCardTitle]} numberOfLines={1}>
         {event.title}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

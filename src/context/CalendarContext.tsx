@@ -16,12 +16,14 @@ interface CalendarContextType {
   theme: Theme;
   events: Event[];
   availability: AvailabilitySlot[];
-  weekViewWidth: number; // Add width to the context
+  weekViewWidth: number;
+  onEventPress?: (event: Event) => void; // Add callback to context
   setCurrentDate: (date: Date) => void;
   setView: (view: ViewMode) => void;
-  setWeekViewWidth: (width: number) => void; // Add setter for width
+  setWeekViewWidth: (width: number) => void;
 }
 
+// Create the context with a default undefined value.
 const CalendarContext = createContext<CalendarContextType | undefined>(
   undefined
 );
@@ -31,6 +33,7 @@ interface CalendarProviderProps {
   theme?: Theme;
   events: Event[];
   availability: AvailabilitySlot[];
+  onEventPress?: (event: Event) => void;
 }
 
 /**
@@ -42,10 +45,11 @@ export const CalendarProvider = ({
   theme = {},
   events = [],
   availability = [],
+  onEventPress,
 }: CalendarProviderProps) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [view, setView] = useState<ViewMode>("week");
-  const [weekViewWidth, setWeekViewWidth] = useState(0); // State for the width
+  const [weekViewWidth, setWeekViewWidth] = useState(0);
 
   const value = {
     currentDate,
@@ -54,6 +58,7 @@ export const CalendarProvider = ({
     events,
     availability,
     weekViewWidth,
+    onEventPress,
     setCurrentDate,
     setView,
     setWeekViewWidth,

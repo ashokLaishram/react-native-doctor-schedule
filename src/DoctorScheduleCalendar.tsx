@@ -14,6 +14,7 @@ export interface DoctorScheduleCalendarProps {
   events?: Event[];
   availability?: AvailabilitySlot[];
   theme?: Theme;
+  onEventPress?: (event: Event) => void;
 }
 
 /**
@@ -43,9 +44,15 @@ const DoctorScheduleCalendar = ({
   events = [],
   availability = [],
   theme,
+  onEventPress,
 }: DoctorScheduleCalendarProps) => {
   return (
-    <CalendarProvider events={events} availability={availability} theme={theme}>
+    <CalendarProvider
+      events={events}
+      availability={availability}
+      theme={theme}
+      onEventPress={onEventPress}
+    >
       <SafeAreaView style={styles.container}>
         <Header />
         <View style={styles.calendarContainer}>
