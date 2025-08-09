@@ -2,77 +2,64 @@
   "name": "react-native-doctor-schedule",
   "version": "0.1.0",
   "description": "A powerful, flexible, and doctor-centric scheduling library for React Native.",
-  "main": "./lib/module/index.js",
-  "types": "./lib/typescript/index.d.ts",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/index.d.ts",
+  "react-native": "src/index.ts",
   "scripts": {
-    "build": "expo-module build",
-    "clean": "expo-module clean",
-    "lint": "expo-module lint",
-    "test": "expo-module test",
+    "build": "bob build",
     "prepare": "bob build",
-    "prepublishOnly": "expo-module prepublishOnly",
-    "expo-module": "expo-module",
-    "open:ios": "xed example/ios",
-    "open:android": "open -a \"Android Studio\" example/android"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "keywords": [
     "react-native",
-    "expo",
-    "react-native-doctor-schedule",
-    "ReactNativeDoctorSchedule"
+    "calendar",
+    "schedule",
+    "doctor",
+    "expo"
   ],
-  "repository": "https://github.com/ashokLaishram/react-native-doctor-schedule",
-  "bugs": {
-    "url": "https://github.com/ashokLaishram/react-native-doctor-schedule/issues"
-  },
-  "author": "ashokLaishram <ashok.laish@gmail.com> (https://github.com/ashokLaishram)",
+  "repository": "https://github.com/YOUR_USERNAME/react-native-doctor-schedule",
+  "author": "Your Name <your.email@example.com>",
   "license": "MIT",
-  "homepage": "https://github.com/ashokLaishram/react-native-doctor-schedule#readme",
-  "dependencies": {
-    "date-fns": "^4.1.0"
-  },
-  "devDependencies": {
-    "@types/react": "~19.0.0",
-    "expo": "~53.0.0",
-    "expo-module-scripts": "^4.1.9",
-    "react-native": "0.79.1",
-    "react-native-builder-bob": "^0.40.13"
-  },
-  "peerDependencies": {
-    "expo": "*",
-    "react": "*",
-    "react-native": "*"
-  },
-  "exports": {
-    ".": {
-      "source": "./src/index.ts",
-      "types": "./lib/typescript/index.d.ts",
-      "default": "./lib/module/index.js"
-    },
-    "./package.json": "./package.json"
-  },
   "files": [
     "src",
     "lib",
     "!**/__tests__",
     "!**/__fixtures__",
-    "!**/__mocks__"
+    "!**/__mocks__",
+    "android",
+    "ios",
+    "react-native-doctor-schedule.podspec"
   ],
+  "peerDependencies": {
+    "react": ">=18.2.0",
+    "react-native": ">=0.74.0",
+    "react-native-gesture-handler": ">=2.16.1",
+    "react-native-reanimated": ">=3.10.1"
+  },
+  "devDependencies": {
+    "@tsconfig/react-native": "^3.0.5",
+    "@types/react": "^18.2.0",
+    "date-fns": "^3.6.0",
+    "react": "18.2.0",
+    "react-native": "0.74.1",
+    "react-native-builder-bob": "^0.23.2",
+    "react-native-gesture-handler": "~2.16.1",
+    "react-native-reanimated": "~3.10.1",
+    "typescript": "^5.3.3"
+  },
   "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
     "targets": [
+      "commonjs",
+      "module",
       [
-        "module",
+        "typescript",
         {
-          "esm": true
+          "project": "tsconfig.build.json"
         }
-      ],
-      "typescript"
+      ]
     ]
-  },
-  "eslintIgnore": [
-    "node_modules/",
-    "lib/"
-  ]
+  }
 }

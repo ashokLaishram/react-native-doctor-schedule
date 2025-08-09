@@ -1,7 +1,10 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { DoctorScheduleCalendar, Event } from "react-native-doctor-schedule";
+// example/src/App.tsx
 
+import React from "react";
+import { DoctorScheduleCalendar, Event } from "react-native-doctor-schedule";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+// Create some sample events to display on the calendar
 const sampleEvents: Event[] = [
   {
     id: 1,
@@ -21,14 +24,8 @@ const sampleEvents: Event[] = [
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <DoctorScheduleCalendar events={sampleEvents} />
-    </View>
+    </GestureHandlerRootView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
