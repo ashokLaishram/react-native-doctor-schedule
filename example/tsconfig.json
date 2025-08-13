@@ -1,10 +1,6 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true,
-    "paths": {
-      "react-native-doctor-schedule": ["../src/index"],
-      "react-native-doctor-schedule/*": ["../src/*"]
-    }
+    "strict": true
   }
 }
